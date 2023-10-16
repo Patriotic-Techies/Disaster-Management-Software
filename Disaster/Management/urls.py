@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
+from . import views 
 from  django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
@@ -17,4 +18,10 @@ urlpatterns = [
 
     #Registration
     path('register/', views.register, name='register'),
+    path('org_registration/', views.organization_registration, name='org_registration'),
+   # path('user_location/', views.user_location, name='user_location'),
+    path('org-loc/', views.organization_locations_map, name='org_loc'),
+    path('location_input/', views.location_input, name='location_input'),
+    path('success/', views.success, name='success'),
+    path('home', views.home, name='home'),
 ]

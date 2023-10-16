@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Disaster.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Disaster',
+        'NAME': 'disaster',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',  # Use 'localhost' if the database is on the same machine
@@ -133,3 +133,5 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+STATIC_URL = '/static/'
+
