@@ -1,4 +1,52 @@
-from django.shortcuts import render, redirect
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Organization
+from .serializers import OrganizationSerializer
+
+@api_view(['GET','POST','PUT','DELETE'])
+def get_organization_locations(request,id):
+    if request.method=="GET":
+       organizations = Organization.objects.all()
+       serializer = OrganizationSerializer(organizations, many=True)
+       return Response(serializer.data)
+    
+    elif request.method=="POST":
+        serializer = OrganizationSerializer(data=request.data)
+        if serializer.is_valid():
+           serializer.save()
+           return Response({'message': 'Organization registered successfully'})
+        return Response(serializer.errors, status=400)
+
+    elif request.method == "PUT":
+        Organizationid = request.data.get('id') 
+        try:
+            organization = Organization.objects.get(Organizationid=id)
+        except Organization.DoesNotExist:
+            return Response({'message': 'Organization not found'}, status=404)
+
+        serializer = OrganizationSerializer(organization, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Organization updated successfully'})
+        return Response(serializer.errors, status=400)
+
+    elif request.method == "DELETE":
+        Organizationid = request.data.get('id')  
+        try:
+            organization = Organization.objects.get(Organizationid=id)
+        except Organization.DoesNotExist:
+            return Response({'message': 'Organization not found'}, status=404)
+
+        organization.delete()
+        return Response({'message': 'Organization deleted successfully'})
+
+    return Response({'message': 'Invalid HTTP method'}, status=405)
+
+
+
+
+"""from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from Management.forms import UserRegistrationForm  # Adjust the import if needed
 from .forms import OrganizationForm
@@ -109,5 +157,5 @@ def home(request):
 
 
 
-
+"""
 
