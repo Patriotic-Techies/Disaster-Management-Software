@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div style="text-align: right;">
+            <p><a href="{% url 'logout' %}">Logout</a></p>
+        </div>
+        <h1>Welcome to Our Organization {{ request.user.first_name }}</h1>
+
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Organization Name</th>
+                    <th>Type</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Admin Name</th>
+                    <th>Team Member Count</th>
+                    <th>Location</th>
+                    
+                    <!-- Add other fields as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for organization in organizations %}
+                    <tr>
+                        <td style="background-color: #f8f9c11f; border: 2px solid #e07a5f;">{{ organization.Organization_name }}</td>
+                        <td style="background-color: #a0ced9; border: 2px solid #81b29a;">{{ organization.Organization_type }}</td>
+                        <td style="background-color: #c1f9f9; border: 2px solid #e07a5f;">{{ organization.address }}</td>
+                        <td style="background-color: #a0ced9; border: 2px solid #81b29a;">{{ organization.phone_number }}</td>
+                        <td style="background-color: #f9ebc1; border: 2px solid #e07a5f;">{{ organization.admin_name }}</td>
+                        <td style="background-color: #a0ced9; border: 2px solid #0bd071;">{{ organization.team_member_count }}</td>
+                        <td style="background-color: #f9ebc1; border: 2px solid #e07a5f;">{{ organization.Organization_location }}</td>
+                        
+                        <!-- Add other fields as needed -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Map Container -->
+        <div id="map" style="height: 500px; width: 100%; margin-top: 60px;"></div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIXhpINJEZOHNbQmjWhQBR4yD_k2H3o1E"></script>
+        <script>
+            var map;
+
+            function initMap() {
+                // Create a new map centered at the first organization's coordinates
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: {{ organizations.first.latitude }}, lng: {{ organizations.first.longitude }} },
+                    zoom: 15
+                });
+
+                // Iterate over organizations and add markers
+                {% for organization in organizations %}
+                    var marker = new google.maps.Marker({
+                        position: { lat: {{ organization.latitude }}, lng: {{ organization.longitude }} },
+                        map: map,
+                        title: '{{ organization.Organization_name }}'
+                    });
+                {% endfor %}
+            }
+        </script>
+
+        <script>
+            // Initialize the map when the page loads
+            initMap();
+        </script>
+    </div>
+{% endblock %}
