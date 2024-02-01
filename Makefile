@@ -7,7 +7,7 @@ run-ios:
 	cd app && npm run ios -- --simulator='iPhone 14 Pro Max'
 
 server:
-	\envs\Dis\Scripts\activate && cd api && python manage.py runserver
+	\envs\comm\Scripts\activate && cd api && python manage.py runserver
 
 redis:
 	redis-server
