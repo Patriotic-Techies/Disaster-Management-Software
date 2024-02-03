@@ -1,0 +1,9 @@
+<!-- display_team.html -->
+
+
+<h2>Team Members</h2>
+<ul>
+    {% for member in team_members %}
+        <li>{{ member.name }} - {{ member.location }} - {{ member.disaster_type }} - {{ member.profession }}</li>
+    {% endfor %}
+</ul>

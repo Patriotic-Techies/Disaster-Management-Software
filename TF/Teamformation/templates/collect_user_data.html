@@ -1,0 +1,7 @@
+<!-- collect_user_data.html -->
+
+<form method="post" action="{% url 'collect_user_data' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
