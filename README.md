@@ -31,8 +31,8 @@ Features
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/yourusername/disastermanagement.git
-    cd disastermanagement/backend
+    git clone https://github.com/Patriotic-Techies/Disaster-Management-Software.git
+    cd api
     ```
 
 2. **Create and activate a virtual environment**:
@@ -65,7 +65,7 @@ Features
 
 1. **Navigate to the frontend directory**:
     ```sh
-    cd ../frontend
+    cd ../app
     ```
 
 2. **Install the dependencies**:
@@ -111,8 +111,8 @@ Features
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'disastermanagement',
-            'USER': 'dm_user',
-            'PASSWORD': 'your_password',
+            'USER': '',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '3306',
         }
@@ -153,7 +153,7 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-For any questions or issues, please contact [your-email@example.com].
+For any questions or issues, please contact [dhaaranidhaaru0411@gmail.com].
 
 ---
 
